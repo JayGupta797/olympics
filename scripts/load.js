@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    d3.csv("../assets/output.csv").then(function(data) {
+    d3.csv("https://raw.githubusercontent.com/JayGupta797/olympics/main/assets/output.csv").then(function(data) {
         const educationData = d3.group(data, d => d.education || "None");
         const medalTableRows = d3.select("#medal-table-rows");
 
