@@ -95,8 +95,8 @@ function loadAthleteData(educationKey, index, container) {
     const athlete = window.athleteData.find(a => a.educationKey === educationKey && a.athleteIndex === index);
     container.innerHTML = `
         <div class="athlete-details">
-            <div class="athlete-photo">
-                <img src="${athlete.thumbnail_url}" alt="${athlete.thumbnail_alt_text}" class="athlete-image">
+            <div class="athlete-frame">
+                <img src="${athlete.thumbnail_url}" alt="${athlete.thumbnail_alt_text}" class="athlete-photo">
             </div>
             <div class="athlete-info">
                 <h2>${athlete.first_name} ${athlete.last_name}</h2>

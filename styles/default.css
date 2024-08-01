@@ -130,7 +130,7 @@ button {
     flex-direction: row;
 }
 
-.athlete-photo {
+.athlete-frame {
     width: 30%;
     margin-right: min(5%, 25px);
     display: flex;
@@ -138,8 +138,9 @@ button {
     align-items: center;
 }
 
-.athlete-image {
+.athlete-photo {
     border-radius: 5px;
+    width: 100%;
 }
 
 .athlete-info {
