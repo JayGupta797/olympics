@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="medal-count">${totals.silver}</div>
                 <div class="medal-count">${totals.bronze}</div>
                 <div class="medal-count">${totals.total}</div>
-                <button onclick="toggleEducationDetails('${educationKey}')"><img src="../assets/expand.svg" alt="Expand" class="expand-icon"></button>
+                <button onclick="toggleEducationDetails('${educationKey}')"><img src="./assets/expand.svg" alt="Expand" class="expand-icon"></button>
             `);
 
             medalTableRows.append("div").attr("class", "education-details-container").attr("id", `education-details-${educationKey}`);
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="medal-count">${athlete.medals_silver}</div>
                     <div class="medal-count">${athlete.medals_bronze}</div>
                     <div class="medal-count">${+athlete.medals_gold + +athlete.medals_silver + +athlete.medals_bronze}</div>
-                    <button onclick="toggleAthleteDetails('${educationKey}', ${athleteIndex})"><img src="../assets/expand.svg" alt="Expand" class="expand-icon"></button>
+                    <button onclick="toggleAthleteDetails('${educationKey}', ${athleteIndex})"><img src="./assets/expand.svg" alt="Expand" class="expand-icon"></button>
                 `);
 
                 d3.select(`#education-details-${educationKey}`).append("div").attr("class", "athlete-details-container").attr("id", `athlete-details-${educationKey}-${athleteIndex}`);
@@ -87,7 +87,7 @@ function toggleAthleteDetails(educationKey, index) {
 }
 
 function updateToggleButton(button, isVisible) {
-    button.innerHTML = `<img src="../assets/${isVisible ? 'expand' : 'collapse'}.svg" alt="${isVisible ? 'Expand' : 'Collapse'}" class="expand-icon">`;
+    button.innerHTML = `<img src="./assets/${isVisible ? 'expand' : 'collapse'}.svg" alt="${isVisible ? 'Expand' : 'Collapse'}" class="expand-icon">`;
     button.classList.toggle('black-background', !isVisible);
 }
 
