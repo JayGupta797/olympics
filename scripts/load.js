@@ -103,7 +103,7 @@ function loadAthleteData(educationKey, index, container) {
                 <hr>
                 <p><strong>Height:</strong> ${athlete.height}</p>
                 <p><strong>Age:</strong> ${athlete.age}</p>
-                <p><strong>Hometown:</strong> ${athlete.hometown_city}, ${athlete.hometown_state}</p>
+                <p><strong>Hometown:</strong> ${athlete.hometown_city}</p>
                 <p><strong>Sport:</strong> ${athlete.sport}</p>
             </div>
         </div>

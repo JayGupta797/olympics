@@ -3,12 +3,6 @@ body {
     font-weight: 300;
     font-size: larger;
     background-color: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 10px;
-    margin: 0;
-    min-height: 100vh;
 }
 
 .medal-table-container {
@@ -45,7 +39,7 @@ body {
 .education-details-container,
 .athlete-details-container {
     display: none;
-    padding: 12px;
+    padding: 10px;
 }
 
 .education-details-container {
@@ -130,18 +124,31 @@ button {
 }
 
 .athlete-frame {
-    margin-right: min(5%, 20px);
+    margin-right: 10px;
+    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .athlete-photo {
-    width: 175px;
-    height: 175px;
+    width: min(100%, 150px);
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     object-position: top;
     border-radius: 5px;
+}
+
+/*@media (max-width: 680px) {
+    .athlete-frame {
+        margin-right: 10px;
+    }
+}*/
+
+@media (max-width: 480px) {
+    .athlete-photo {
+        aspect-ratio: auto;
+    }
 }
 
 .athlete-info {
