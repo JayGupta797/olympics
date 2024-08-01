@@ -71,7 +71,6 @@ body {
     border: 1px solid black;
 }
 
-.medal-order,
 .medal-count {
     text-align: center;
 }
@@ -132,15 +131,18 @@ button {
 
 .athlete-frame {
     width: 30%;
-    margin-right: min(5%, 25px);
+    margin-right: min(5%, 20px);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .athlete-photo {
+    width: 175px;
+    height: 175px;
+    object-fit: cover;
+    object-position: top;
     border-radius: 5px;
-    width: 100%;
 }
 
 .athlete-info {
