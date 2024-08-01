@@ -130,7 +130,6 @@ button {
 }
 
 .athlete-frame {
-    width: 30%;
     margin-right: min(5%, 20px);
     display: flex;
     justify-content: center;
@@ -146,7 +145,7 @@ button {
 }
 
 .athlete-info {
-    width: 65%;
+    width: 70%;
 }
 
 .athlete-info h2 {
