@@ -124,7 +124,7 @@ button {
 }
 
 .athlete-frame {
-    margin-right: 10px;
+    margin: 10px;
     width: 30%;
     display: flex;
     justify-content: center;
@@ -137,18 +137,6 @@ button {
     object-fit: cover;
     object-position: top;
     border-radius: 5px;
-}
-
-/*@media (max-width: 680px) {
-    .athlete-frame {
-        margin-right: 10px;
-    }
-}*/
-
-@media (max-width: 480px) {
-    .athlete-photo {
-        aspect-ratio: auto;
-    }
 }
 
 .athlete-info {
@@ -167,4 +155,10 @@ button {
 
 .athlete-info p strong {
     display: inline-block;
+}
+
+@media (max-width: 480px) {
+    .athlete-photo {
+        height: 100%;
+    }
 }
