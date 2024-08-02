@@ -124,7 +124,8 @@ button {
 }
 
 .athlete-frame {
-    margin: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
     width: 30%;
     display: flex;
     justify-content: center;
