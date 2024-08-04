@@ -1,3 +1,4 @@
+/* General body styling */
 body {
     font-family: 'Fira Sans', sans-serif;
     font-weight: 300;
@@ -5,17 +6,20 @@ body {
     background-color: #f5f5f5;
 }
 
+/* Container for the medal table */
 .medal-table-container {
     width: 100%;
     max-width: 750px;
     margin: 0 auto;
 }
 
+/* Styling for the medal table */
 .medal-table {
     width: 100%;
     margin: auto;
 }
 
+/* Common styling for table headers and rows */
 .medal-table-header,
 .medal-table-row {
     display: grid;
@@ -24,10 +28,12 @@ body {
     padding: 10px;
 }
 
+/* Styling specific to the table header */
 .medal-table-header {
     font-weight: 400;
 }
 
+/* Styling specific to each row in the table */
 .medal-table-row {
     background-color: white;
     border: 1px solid #ddd;
@@ -36,39 +42,46 @@ body {
     font-weight: 300;
 }
 
+/* Containers for additional details */
 .education-details-container,
 .athlete-details-container {
     display: none;
     padding: 10px;
 }
 
+/* Specific styling for education details */
 .education-details-container {
     margin-top: -15px;
-    padding: 0px;
+    padding: 0;
     border: 1px solid #ddd;
 }
 
+/* Specific styling for athlete details */
 .athlete-details-container {
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
 }
 
+/* Styling for sub-rows in the table */
 .medal-table-sub-row {
-    margin: 0px;
-    border: 0px;
-    border-radius: 0px;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
 }
 
+/* Styling for flag icons */
 .flag {
     width: 25px;
     margin-right: 10px;
     border: 1px solid black;
 }
 
+/* Center-align text in medal count columns */
 .medal-count {
     text-align: center;
 }
 
+/* Icons styling */
 .total-medal-icon,
 .expand-icon {
     width: 20px;
@@ -77,11 +90,13 @@ body {
     cursor: pointer;
 }
 
+/* Black background styling */
 .black-background {
     background-color: black;
     color: white;
 }
 
+/* Button styling */
 button {
     margin-left: auto;
     display: flex;
@@ -95,6 +110,7 @@ button {
     cursor: pointer;
 }
 
+/* Medal colors styling */
 .gold, .silver, .bronze {
     display: inline-block;
     width: 24px;
@@ -106,6 +122,7 @@ button {
     border: 1px solid black;
 }
 
+/* Specific colors for each medal */
 .gold {
     background-color: #F4CA72;
 }
@@ -118,11 +135,13 @@ button {
     background-color: #D0B189;
 }
 
+/* Athlete details section styling */
 .athlete-details {
     display: flex;
     flex-direction: row;
 }
 
+/* Frame for athlete photos */
 .athlete-frame {
     margin-left: 10px;
     margin-right: 10px;
@@ -132,6 +151,7 @@ button {
     align-items: center;
 }
 
+/* Athlete photo styling */
 .athlete-photo {
     width: min(100%, 150px);
     aspect-ratio: 1 / 1;
@@ -140,24 +160,29 @@ button {
     border-radius: 5px;
 }
 
+/* Athlete information styling */
 .athlete-info {
     width: 70%;
 }
 
+/* Heading styling within athlete info */
 .athlete-info h2 {
     margin: 0;
     font-size: 24px;
     font-weight: bold;
 }
 
+/* Paragraph styling within athlete info */
 .athlete-info p {
     margin: 5px 0;
 }
 
+/* Strong tag styling within athlete info */
 .athlete-info p strong {
     display: inline-block;
 }
 
+/* Responsive styling for small screens */
 @media (max-width: 480px) {
     .athlete-photo {
         height: 100%;
