@@ -3,25 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="2024 Olympics medal standings by school">
+    <meta name="color-scheme" content="dark">
     <link rel="stylesheet" href="./styles/default.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>Medal Table</title>
 </head>
 <body>
-    <div class="medal-table-container">
-        <div class="medal-table">
-            <div class="medal-table-header">
-                <div>Rank</div>
-                <div>School</div>
-                <div class="medal-count gold">G</div>
-                <div class="medal-count silver">S</div>
-                <div class="medal-count bronze">B</div>
-                <div class="medal-count total"><img src="./assets/medalAll.svg" alt="Total Medals" class="total-medal-icon"></div>
-                <div></div>
+    <main class="page">
+        <div class="medal-table-container">
+            <div class="medal-table">
+                <div class="medal-table-header">
+                    <div class="col-rank">Rank</div>
+                    <div class="col-name">School</div>
+                    <div class="col-medal"><img src="./assets/medalGold.svg" alt="Gold" class="medal-icon"></div>
+                    <div class="col-medal"><img src="./assets/medalSilver.svg" alt="Silver" class="medal-icon"></div>
+                    <div class="col-medal"><img src="./assets/medalBronze.svg" alt="Bronze" class="medal-icon"></div>
+                    <div class="col-medal"><img src="./assets/medalAll.svg" alt="Total" class="medal-icon medal-icon-total"></div>
+                    <div class="col-action"></div>
+                </div>
+                <div id="medal-table-rows"></div>
             </div>
-            <div id="medal-table-rows"></div>
         </div>
-    </div>
+    </main>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="./scripts/script.js"></script>
 </body>

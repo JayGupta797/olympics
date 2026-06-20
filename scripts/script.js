@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     d3.csv("./2024-olympics-medals.csv").then(function(data) {
-        const educationData = d3.group(data, d => d.education || "None");
+        data = data.filter(d => d.education && d.education.trim());
+        const educationData = d3.group(data, d => d.education);
         const medalTableRows = d3.select("#medal-table-rows");
 
         // Calculate totals for each education group and store them in an array
@@ -41,13 +42,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const row = medalTableRows.append("div").attr("class", "medal-table-row");
 
             row.html(`
-                <div class="medal-order">${index + 1}</div>
-                <div>${education}</div>
-                <div class="medal-count">${totals.gold}</div>
-                <div class="medal-count">${totals.silver}</div>
-                <div class="medal-count">${totals.bronze}</div>
-                <div class="medal-count">${totals.total}</div>
-                <button onclick="toggleEducationDetails('${educationKey}')">
+                <div class="col-rank"><span class="medal-order">${index + 1}</span></div>
+                <div class="col-name">${education}</div>
+                <div class="col-medal">${totals.gold}</div>
+                <div class="col-medal">${totals.silver}</div>
+                <div class="col-medal">${totals.bronze}</div>
+                <div class="col-medal">${totals.total}</div>
+                <button class="col-action" onclick="toggleEducationDetails('${educationKey}')">
                     <img src="./assets/expand.svg" alt="Expand" class="expand-icon">
                 </button>
             `);
@@ -59,23 +60,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Append a row for each athlete within the education group
             athletes.forEach((athlete, athleteIndex) => {
-                const athleteRow = d3.select(`#education-details-${educationKey}`).append("div")
+                const athleteEntry = d3.select(`#education-details-${educationKey}`).append("div")
+                    .attr("class", "athlete-entry");
+
+                const athleteRow = athleteEntry.append("div")
                     .attr("class", "medal-table-row medal-table-sub-row");
 
                 athleteRow.html(`
-                    <div class="medal-order">${athleteIndex + 1}</div>
-                    <div>${athlete.first_name} ${athlete.last_name}</div>
-                    <div class="medal-count">${athlete.medals_gold}</div>
-                    <div class="medal-count">${athlete.medals_silver}</div>
-                    <div class="medal-count">${athlete.medals_bronze}</div>
-                    <div class="medal-count">${+athlete.medals_gold + +athlete.medals_silver + +athlete.medals_bronze}</div>
-                    <button onclick="toggleAthleteDetails('${educationKey}', ${athleteIndex})">
+                    <div class="col-rank"><span class="medal-order sub">${athleteIndex + 1}</span></div>
+                    <div class="col-name">${athlete.first_name} ${athlete.last_name}</div>
+                    <div class="col-medal">${athlete.medals_gold}</div>
+                    <div class="col-medal">${athlete.medals_silver}</div>
+                    <div class="col-medal">${athlete.medals_bronze}</div>
+                    <div class="col-medal">${+athlete.medals_gold + +athlete.medals_silver + +athlete.medals_bronze}</div>
+                    <button class="col-action" onclick="toggleAthleteDetails('${educationKey}', ${athleteIndex})">
                         <img src="./assets/expand.svg" alt="Expand" class="expand-icon">
                     </button>
                 `);
 
-                // Append a container for each athlete's details
-                d3.select(`#education-details-${educationKey}`).append("div")
+                athleteEntry.append("div")
                     .attr("class", "athlete-details-container")
                     .attr("id", `athlete-details-${educationKey}-${athleteIndex}`);
             });
@@ -94,30 +97,29 @@ function toggleEducationDetails(educationKey) {
     const detailsDiv = document.getElementById(`education-details-${educationKey}`);
     const isVisible = detailsDiv.style.display === "block";
     detailsDiv.style.display = isVisible ? "none" : "block";
-    updateToggleButton(detailsDiv.previousElementSibling.querySelector('button'), isVisible);
+    const button = detailsDiv.previousElementSibling.querySelector('button');
+    updateToggleButton(button, isVisible);
+    button.blur();
 }
 
-/**
- * Toggles the visibility of athlete details.
- * @param {string} educationKey - The unique key identifying the education group.
- * @param {number} index - The index of the athlete within the education group.
- */
 function toggleAthleteDetails(educationKey, index) {
     const detailsDiv = document.getElementById(`athlete-details-${educationKey}-${index}`);
-    const isVisible = detailsDiv.style.display === "block";
-    detailsDiv.style.display = isVisible ? "none" : "block";
-    updateToggleButton(detailsDiv.previousElementSibling.querySelector('button'), isVisible);
+    const isVisible = detailsDiv.style.display === "grid";
+    detailsDiv.style.display = isVisible ? "none" : "grid";
+    detailsDiv.closest('.athlete-entry').classList.toggle('is-expanded', !isVisible);
+    const button = detailsDiv.previousElementSibling.querySelector('button');
+    updateToggleButton(button, isVisible);
+    button.blur();
     if (!isVisible) loadAthleteData(educationKey, index, detailsDiv);
 }
 
 /**
- * Updates the expand/collapse button icon and background color.
+ * Updates the expand/collapse button icon.
  * @param {HTMLButtonElement} button - The button element to update.
  * @param {boolean} isVisible - Whether the details are currently visible.
  */
 function updateToggleButton(button, isVisible) {
     button.innerHTML = `<img src="./assets/${isVisible ? 'expand' : 'collapse'}.svg" alt="${isVisible ? 'Expand' : 'Collapse'}" class="expand-icon">`;
-    button.classList.toggle('black-background', !isVisible);
 }
 
 /**
@@ -130,11 +132,11 @@ function loadAthleteData(educationKey, index, container) {
     const athlete = window.athleteData.find(a => a.educationKey === educationKey && a.athleteIndex === index);
     container.innerHTML = `
         <div class="athlete-details">
-            <div class="athlete-frame">
+            <div class="athlete-photo-wrap">
                 <img src="${athlete.thumbnail_url}" alt="${athlete.thumbnail_alt_text}" class="athlete-photo">
             </div>
             <div class="athlete-info">
-                <h2>${athlete.first_name} ${athlete.last_name}</h2>
+                <h2 class="athlete-name">${athlete.first_name} ${athlete.last_name}</h2>
                 <hr>
                 <p><strong>Height:</strong> ${athlete.height}</p>
                 <p><strong>Age:</strong> ${athlete.age}</p>
@@ -143,4 +145,15 @@ function loadAthleteData(educationKey, index, container) {
             </div>
         </div>
     `;
+
+    const syncPhotoSize = () => {
+        const info = container.querySelector('.athlete-info');
+        const wrap = container.querySelector('.athlete-photo-wrap');
+        if (info && wrap && info.offsetHeight > 0) {
+            wrap.style.width = `${info.offsetHeight}px`;
+        }
+    };
+
+    requestAnimationFrame(syncPhotoSize);
+    container.querySelector('.athlete-photo').addEventListener('load', syncPhotoSize);
 }

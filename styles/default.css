@@ -1,190 +1,362 @@
-/* General body styling */
+:root {
+    --color-bg: #0f1117;
+    --color-surface: #1a1d26;
+    --color-border: #2a3040;
+    --color-border-strong: #3d4450;
+    --color-text: #eef0f4;
+    --color-text-muted: #9ca3af;
+    --color-text-subtle: #6b7280;
+    --color-accent: #3b82f6;
+    --color-accent-ring: rgba(59, 130, 246, 0.2);
+    --color-gold-bg: rgba(245, 200, 66, 0.12);
+    --color-gold-ring: rgba(245, 200, 66, 0.35);
+    --color-silver-bg: rgba(196, 201, 212, 0.1);
+    --color-silver-ring: rgba(196, 201, 212, 0.35);
+    --color-bronze-bg: rgba(201, 149, 106, 0.12);
+    --color-bronze-ring: rgba(201, 149, 106, 0.35);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
+    --col-rank: 44px;
+    --col-medal: 40px;
+    --col-action: 36px;
+    --row-gap: 6px;
+    --row-padding-x: 16px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --transition: 0.18s ease;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: 'Fira Sans', sans-serif;
-    font-weight: 300;
-    font-size: larger;
-    background-color: #f5f5f5;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Container for the medal table */
-.medal-table-container {
-    width: 100%;
-    max-width: 750px;
+.page {
+    max-width: 820px;
     margin: 0 auto;
+    padding: 32px 20px;
 }
 
-/* Styling for the medal table */
+.medal-table-container,
 .medal-table {
     width: 100%;
-    margin: auto;
 }
 
-/* Common styling for table headers and rows */
 .medal-table-header,
 .medal-table-row {
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: var(--col-rank) 1fr repeat(4, var(--col-medal)) var(--col-action);
+    column-gap: var(--row-gap);
     align-items: center;
-    padding: 10px;
+    padding: 0 var(--row-padding-x);
 }
 
-/* Styling specific to the table header */
-.medal-table-header {
-    font-weight: 400;
-}
-
-/* Styling specific to each row in the table */
-.medal-table-row {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin: 10px 0;
-    font-weight: 300;
-}
-
-/* Containers for additional details */
-.education-details-container,
-.athlete-details-container {
-    display: none;
-    padding: 10px;
-}
-
-/* Specific styling for education details */
-.education-details-container {
-    margin-top: -15px;
-    padding: 0;
-    border: 1px solid #ddd;
-}
-
-/* Specific styling for athlete details */
-.athlete-details-container {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-}
-
-/* Styling for sub-rows in the table */
-.medal-table-sub-row {
-    margin: 0;
-    border: 0;
-    border-radius: 0;
-}
-
-/* Styling for flag icons */
-.flag {
-    width: 25px;
-    margin-right: 10px;
-    border: 1px solid black;
-}
-
-/* Center-align text in medal count columns */
-.medal-count {
-    text-align: center;
-}
-
-/* Icons styling */
-.total-medal-icon,
-.expand-icon {
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
-    cursor: pointer;
-}
-
-/* Black background styling */
-.black-background {
-    background-color: black;
-    color: white;
-}
-
-/* Button styling */
-button {
-    margin-left: auto;
+.col-rank,
+.col-medal,
+.col-action {
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 25px;
-    height: 25px;
-    border: 1px solid black;
-    border-radius: 25%;
-    background-color: white;
-    cursor: pointer;
+    justify-content: center;
 }
 
-/* Medal colors styling */
-.gold, .silver, .bronze {
-    display: inline-block;
+.col-name {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.col-medal {
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.medal-table-header {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 8px;
+}
+
+.medal-table-header .col-name {
+    justify-self: start;
+}
+
+.medal-table-row {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: 8px;
+    min-height: 52px;
+    box-shadow: var(--shadow-sm);
+    transition: background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+#medal-table-rows > .medal-table-row {
+    transition: box-shadow var(--transition), border-color var(--transition);
+}
+
+#medal-table-rows > .medal-table-row:hover {
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-md);
+}
+
+.medal-table-row .col-name {
+    font-weight: 500;
+}
+
+.medal-order {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    border-radius: 50%;
+    background: var(--color-bg);
+}
+
+.medal-order.sub {
     width: 24px;
     height: 24px;
-    line-height: 24px;
-    border-radius: 50%;
-    text-align: center;
-    margin: auto;
-    border: 1px solid black;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: transparent;
+    color: var(--color-text-subtle);
 }
 
-/* Specific colors for each medal */
-.gold {
-    background-color: #F4CA72;
+#medal-table-rows > .medal-table-row:nth-child(1) .medal-order:not(.sub) {
+    background: var(--color-gold-bg);
+    box-shadow: inset 0 0 0 1px var(--color-gold-ring);
 }
 
-.silver {
-    background-color: #E5E5E5;
+#medal-table-rows > .medal-table-row:nth-child(3) .medal-order:not(.sub) {
+    background: var(--color-silver-bg);
+    box-shadow: inset 0 0 0 1px var(--color-silver-ring);
 }
 
-.bronze {
-    background-color: #D0B189;
+#medal-table-rows > .medal-table-row:nth-child(5) .medal-order:not(.sub) {
+    background: var(--color-bronze-bg);
+    box-shadow: inset 0 0 0 1px var(--color-bronze-ring);
 }
 
-/* Athlete details section styling */
-.athlete-details {
-    display: flex;
-    flex-direction: row;
+.medal-icon {
+    display: block;
+    width: 18px;
+    height: auto;
+    flex-shrink: 0;
 }
 
-/* Frame for athlete photos */
-.athlete-frame {
-    margin-left: 10px;
-    margin-right: 10px;
-    width: 30%;
+.medal-icon-total {
+    width: 22px;
+}
+
+.expand-icon {
+    width: 14px;
+    height: 14px;
+    opacity: 0.65;
+    filter: invert(0.92);
+    transition: opacity var(--transition);
+}
+
+.col-action button,
+button.col-action {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-surface);
+    cursor: pointer;
+    padding: 0;
+    transition: background-color var(--transition), transform var(--transition);
 }
 
-/* Athlete photo styling */
+.col-action button:hover,
+button.col-action:hover {
+    background-color: var(--color-bg);
+    border-color: var(--color-border-strong);
+}
+
+.col-action button:hover .expand-icon,
+button.col-action:hover .expand-icon {
+    opacity: 1;
+}
+
+.col-action button:active,
+button.col-action:active {
+    transform: scale(0.94);
+}
+
+.col-action button:focus,
+button.col-action:focus {
+    outline: none;
+}
+
+.col-action button:focus:not(:focus-visible),
+button.col-action:focus:not(:focus-visible) {
+    border-color: var(--color-border);
+    box-shadow: none;
+}
+
+.col-action button:focus-visible,
+button.col-action:focus-visible {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px var(--color-accent-ring);
+}
+
+.education-details-container {
+    display: none;
+    margin: -4px 0 8px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: background-color var(--transition), border-color var(--transition);
+}
+
+.athlete-entry {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.athlete-entry:last-child {
+    border-bottom: none;
+}
+
+.athlete-entry.is-expanded {
+    background: var(--color-bg);
+}
+
+.medal-table-sub-row {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 44px;
+    background: transparent;
+    transition: none;
+}
+
+.medal-table-sub-row .col-name {
+    font-weight: 400;
+    color: var(--color-text);
+}
+
+.athlete-details-container {
+    display: none;
+    grid-template-columns: var(--col-rank) 1fr repeat(4, var(--col-medal)) var(--col-action);
+    column-gap: var(--row-gap);
+    padding: 12px var(--row-padding-x) 12px;
+    border-top: 1px solid var(--color-border);
+}
+
+.athlete-details {
+    grid-column: 2 / -2;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    align-items: start;
+}
+
+.athlete-photo-wrap {
+    grid-column: 1;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+}
+
 .athlete-photo {
-    width: min(100%, 150px);
+    display: block;
+    width: 100%;
+    height: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     object-position: top;
-    border-radius: 5px;
 }
 
-/* Athlete information styling */
 .athlete-info {
-    width: 70%;
+    grid-column: 2;
+    min-width: 0;
 }
 
-/* Heading styling within athlete info */
-.athlete-info h2 {
+.athlete-name {
     margin: 0;
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
 }
 
-/* Paragraph styling within athlete info */
+.athlete-info hr {
+    margin: 8px 0;
+    border: none;
+    border-top: 1px solid var(--color-border);
+}
+
 .athlete-info p {
-    margin: 5px 0;
+    margin: 4px 0;
+    font-size: 0.875rem;
+    line-height: 1.35;
+    color: var(--color-text);
 }
 
-/* Strong tag styling within athlete info */
+.athlete-info p:last-child {
+    margin-bottom: 0;
+}
+
 .athlete-info p strong {
-    display: inline-block;
+    font-weight: 600;
 }
 
-/* Responsive styling for small screens */
-@media (max-width: 480px) {
-    .athlete-photo {
-        height: 100%;
+.flag {
+    width: 24px;
+    margin-right: 8px;
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+}
+
+@media (max-width: 600px) {
+    :root {
+        --col-rank: 36px;
+        --col-medal: 34px;
+        --col-action: 34px;
+        --row-gap: 4px;
+        --row-padding-x: 12px;
+    }
+
+    .page {
+        padding: 32px 16px 48px;
+    }
+
+    .medal-table-row {
+        min-height: 48px;
+        font-size: 0.875rem;
+    }
+
+    .athlete-details-container {
+        padding: 10px var(--row-padding-x) 10px;
     }
 }
